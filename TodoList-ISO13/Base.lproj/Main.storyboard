@@ -30,7 +30,14 @@
                             <outlet property="delegate" destination="ZtA-ZB-KgR" id="DL9-Vj-HLo"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Todo List" id="8ob-YU-LUN"/>
+                    <navigationItem key="navigationItem" title="Todo List" id="8ob-YU-LUN">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="mGR-Fc-OcY">
+                            <color key="tintColor" systemColor="secondarySystemGroupedBackgroundColor"/>
+                            <connections>
+                                <action selector="AddNewItem:" destination="ZtA-ZB-KgR" id="Q50-wn-L4Z"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lsm-gH-Mhw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -41,7 +48,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NxA-Z6-0rL" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" userInteractionEnabled="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Kmd-du-Kua">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Kmd-du-Kua">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" systemColor="systemOrangeColor"/>
@@ -60,6 +67,9 @@
         </scene>
     </scenes>
     <resources>
+        <systemColor name="secondarySystemGroupedBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
