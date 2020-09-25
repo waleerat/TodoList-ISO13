@@ -8,39 +8,37 @@
 import UIKit
 
 class TodoListTableViewController: UITableViewController {
-    var itemArry = [Item]()
-    let defaults = UserDefaults.standard
-    
+    var itemArray = [Item]()
+    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         let newItem = Item()
         newItem.title = "Waleerat1"
-        itemArry.append(newItem)
+        itemArray.append(newItem)
         let newItem1 = Item()
         newItem1.title = "Waleerat2"
-        itemArry.append(newItem1)
+        itemArray.append(newItem1)
         let newItem2 = Item()
         newItem2.title = "Waleerat3"
-        itemArry.append(newItem2)
+        itemArray.append(newItem2)
         
-        if let items = defaults.array(forKey: "todoListArray") as? [Item] {
-            itemArry = items
-        }
+         
     
     }
 
     // MARK: - TabelView Datasource Method
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return itemArry.count
+        return itemArray.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: K.cell.todoListItem, for: indexPath)
         
-        let item = itemArry[indexPath.row]
+        let item = itemArray[indexPath.row]
         cell.textLabel?.text = item.title
         cell.accessoryType =  item.done ? .checkmark : .none
         
@@ -50,7 +48,7 @@ class TodoListTableViewController: UITableViewController {
     // MARK: - Tabelview Delegate Method
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // set opposit value true/false
-        itemArry[indexPath.row].done = !itemArry[indexPath.row].done
+        itemArray[indexPath.row].done = !itemArray[indexPath.row].done
 
         tableView.reloadData()
         tableView.deselectRow(at: indexPath, animated: true)
@@ -68,10 +66,15 @@ class TodoListTableViewController: UITableViewController {
             // What will happen once the user clicks the AddItem button on our UIAlert
             let newItem = Item()
             newItem.title = textField.text!
-            self.itemArry.append(newItem)
-            
-            self.defaults.setValue(self.itemArry, forKey: "todoListArray")
-            
+            self.itemArray.append(newItem)
+             
+            let encoder = PropertyListEncoder()
+            do {
+                let data = try encoder.encode(self.itemArray)
+                try data.write(to: self.dataFilePath!)
+            } catch {
+               print("Error encoding item array")
+            }
             self.tableView.reloadData()
         }
         
