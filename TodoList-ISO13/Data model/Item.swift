@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Item: Encodable {  // can encode to json
+class Item: Codable {  // can encode to json
     var title: String = ""
     var done: Bool = false
 }
